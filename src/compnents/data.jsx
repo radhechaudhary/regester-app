@@ -19,7 +19,7 @@ const location=useLocation()
     const [loading,  setLoading]=useState(false)
 
     useEffect(()=>{      // use Effect when the page loads 
-        axios.get(`http://localhost:4000/data?apiKey=${process.env.REACT_APP_API_KEY}&username=${props.username}`)
+        axios.get(`${REACT_APP_API_URL}/data?apiKey=${process.env.REACT_APP_API_KEY}&username=${props.username}`)
         .then((response)=>{
             setdatabase(response.data)
         })
