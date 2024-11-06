@@ -43,7 +43,7 @@ function checkLogin(username, password){                        // function to c
   setLoginData({username:username, password:password});
 }
 useEffect(()=>{         // useEffect which triggers when login data is changed connects with the databse and check whether data is valid or not
-      axios.post(`${REACT_APP_API_URL}/login`,{username:loginData.username, password:loginData.password})
+      axios.post(`${process.env.REACT_APP_API_URL}/login`,{username:loginData.username, password:loginData.password})
       .then((response)=>{
         if(response.data==='valid'){
           if(loginData.username!==currentUser){
@@ -82,7 +82,7 @@ function signUp(values){ // function which triggers  when signUp form is  submit
 }
 
 useEffect(()=>{          // useState which triggers when signUpData is updated everytime
-  axios.post(`${REACT_APP_API_URL}/signup`,{name:signUpData.name, mobile:signUpData.mobile, username:signUpData.username, password:signUpData.password})
+  axios.post(`${process.env.REACT_APP_API_URL}/signup`,{name:signUpData.name, mobile:signUpData.mobile, username:signUpData.username, password:signUpData.password})
   .then((response)=>{
       if(signUpData.name){
         setCurrentUser(signUpData.username ); 

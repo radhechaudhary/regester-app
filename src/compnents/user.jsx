@@ -65,7 +65,7 @@ function User(prop) {
         alert("Any field cannot be empty!!")
       }
       else{
-      axios.post(`${REACT_APP_API_URL}/data-submit?apiKey=${process.env.REACT_APP_API_KEY}`,{...details,roomNo:roomNo, username:localStorage.getItem('username')})
+      axios.post(`${process.env.REACT_APP_API_URL}/data-submit?apiKey=${process.env.REACT_APP_API_KEY}`,{...details,roomNo:roomNo, username:localStorage.getItem('username')})
       .then((response)=>{
         localStorage.removeItem(`room-details-${roomNo}`);
         setDetails({roomNo:0, name:"", inDate:"", inTime:"", idNo:"", mobile:"", members:"", OutDate:"", OutTime:""})
