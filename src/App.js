@@ -89,7 +89,7 @@ useEffect(()=>{          // useState which triggers when signUpData is updated e
         setCurrentUser(signUpData.username ); 
         localStorage.setItem('isLoggedIn', "true")
         localStorage.setItem('username', signUpData.username )
-        localStorage.setItem('name', SignUpData.name)
+        localStorage.setItem('name', signUpData.name)
         setLoading(true)
         setTimeout(()=>{
           setError("")
