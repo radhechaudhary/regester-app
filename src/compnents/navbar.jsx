@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 const style={fontSize:"50px"};
 function Navbar(props) {
     const profileMenuRef=useRef(null)
+    const navMenuRef=useRef(null)
     const [showMenu, setShowMenu]=React.useState(false)
     const [showProfile,  setShowProfile]=useState(null)
     function toggleMenu(){
@@ -25,12 +26,10 @@ function Navbar(props) {
     }
     useEffect(()=>{
         if(showProfile){
-            console.log('added')
             document.addEventListener('click' , clickedOutside)
         }
     },[showProfile])
     function clickedOutside(event){
-        console.log(showProfile)
         if( profileMenuRef.current && !profileMenuRef.current.contains(event.target)){
             setShowProfile(false)
             document.removeEventListener('click', clickedOutside)
@@ -48,7 +47,7 @@ function Navbar(props) {
             {props.loggedIn===false?<><li><Link to="/login"onClick={toggleMenu}>LOGIN</Link></li><li><Link to="/signup" onClick={()=>{toggleMenu(); props.setCurrPage("login")}}>SIGN UP</Link></li></>:<></>}
         </ul>
         {props.loggedIn===true?<button ref={profileMenuRef} className="avatar" onClick={toggleProfile}><Avatar alt="Remy Sharp" /></button>:<></>}
-        {props.loggedIn===false?<div onClick={toggleMenu} className="menu">☰</div>:<></>}
+        {props.loggedIn===false?<div onClick={toggleMenu} ref={navMenuRef} className="menu">☰</div>:<></>}
         </div>
        {props.loggedIn===true?
        <div className={`profile-menu ${showProfile?"show":""}`}>
