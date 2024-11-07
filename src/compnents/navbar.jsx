@@ -9,6 +9,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Tooltip from '@mui/material/Tooltip';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
 const style={fontSize:"50px"};
@@ -47,13 +48,13 @@ function Navbar(props) {
             {props.loggedIn===false?<><li><Link to="/login"onClick={toggleMenu}>LOGIN</Link></li><li><Link to="/signup" onClick={()=>{toggleMenu(); props.setCurrPage("login")}}>SIGN UP</Link></li></>:<></>}
         </ul>
         {props.loggedIn===true?<button ref={profileMenuRef} className="avatar" onClick={toggleProfile}><Avatar alt="Remy Sharp" /></button>:<></>}
-        <div onClick={toggleMenu} ref={navMenuRef} className="menu">☰</div>
+        <div onClick={toggleMenu} ref={navMenuRef} className="menu"><MoreVertIcon sx={{ color: 'rgb(58,58,58)', fontSize:'40px' }} /></div>
         </div>
        {props.loggedIn===true?
        <div className={`profile-menu ${showProfile?"show":""}`}>
             <div  className='profile-head'>
                 <Avatar sx={{  fontSize:'60px' }} alt="Remy Sharp" />
-                <h2>Mohit Chaudhary</h2>
+                <h2>{localStorage.getItem('name')}</h2>
             </div>
             <div  className='buttons'>
                 <Tooltip title="rooms" followCursor ><button onClick={()=>{toggleProfile()}}><HotelIcon sx={{ color: 'white', fontSize:'50px' }}/></button></Tooltip>

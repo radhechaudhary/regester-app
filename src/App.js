@@ -45,7 +45,7 @@ function checkLogin(username, password){                        // function to c
 useEffect(()=>{         // useEffect which triggers when login data is changed connects with the databse and check whether data is valid or not
       axios.post(`${process.env.REACT_APP_API_URL}/login`,{username:loginData.username, password:loginData.password})
       .then((response)=>{
-        if(response.data==='valid'){
+        if(response.data.status==='valid'){
           if(loginData.username!==currentUser){
             for(let i=101;i<1000;i++){
               localStorage.removeItem(`room-details-${i}`)
@@ -53,6 +53,7 @@ useEffect(()=>{         // useEffect which triggers when login data is changed c
           }
           setCurrentUser(loginData.username);
           localStorage.setItem('isLoggedIn', "true") // if data is valid  loggedIn value  is set to true;
+          localStorage.setItem('name', response.data.name )
           localStorage.setItem('username',  loginData.username)  // set the username in local storage
           setLoading(true)
           setTimeout(()=>{
@@ -88,6 +89,7 @@ useEffect(()=>{          // useState which triggers when signUpData is updated e
         setCurrentUser(signUpData.username ); 
         localStorage.setItem('isLoggedIn', "true")
         localStorage.setItem('username', signUpData.username )
+        localStorage.setItem('name', SignUpData.name)
         setLoading(true)
         setTimeout(()=>{
           setError("")
