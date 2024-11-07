@@ -57,7 +57,7 @@ function Navbar(props) {
             </div>
             <div  className='buttons'>
                 <Tooltip title="rooms" followCursor ><button onClick={()=>{toggleProfile()}}><HotelIcon sx={{ color: 'white', fontSize:'50px' }}/></button></Tooltip>
-                <Tooltip title="entries" followCursor>{props.loggedIn===true && props.currPage!=="data"?<Link to="/data" onClick={()=>{toggleMenu(); toggleProfile(); props.setCurrPage("data")}}><LocalLibraryIcon  sx={{ color: 'white', fontSize:'50px' }}/></Link>:<></>}</Tooltip>
+                <Tooltip title="entries" followCursor>{props.loggedIn===true && props.currPage!=="data"?<Link to="/data" onClick={()=>{ toggleProfile(); props.setCurrPage("data")}}><LocalLibraryIcon  sx={{ color: 'white', fontSize:'50px' }}/></Link>:<></>}</Tooltip>
                 <Tooltip title="info" followCursor><Link to='/profile-info' onClick={()=>{toggleProfile()}}><InfoIcon sx={{ color: 'white', fontSize:'50px' }}/></Link></Tooltip>
                 <Tooltip title="setting" followCursor><button onClick={()=>{toggleProfile()}}><SettingsIcon sx={{ color: 'white', fontSize:'50px' }}/></button></Tooltip>
                 
