@@ -5,6 +5,7 @@
   font-family: "Arima", serif;
   font-optical-sizing: auto;
   font-style: normal;
+  
 }
 body{
   overflow: scroll;
@@ -22,15 +23,19 @@ body::-webkit-scrollbar{
   justify-content: space-between;
   padding:0px 50px;
   align-items: center;
-  background-color: rgba(255, 255, 255,1);
-  /* background-color: transparent; */
+  background-color: transparent;
   height:80px;
   width:100%;
-  color:rgb(0, 0, 0);
-  border-bottom: 3px solid rgb(200 195 195);
+  color:white;
+  /* border-bottom: 3px solid rgb(200 195 195); */
+}
+.background-dark{
+  background-color: rgb(37, 36, 36);
 }
 .navbar .nav-icon{
   height:100%;
+  display: flex;
+  align-items: center;
 }
 .nav-icon img{
   height:100%;
@@ -64,11 +69,11 @@ body::-webkit-scrollbar{
 }
 .nav-list li a{
   padding:0px 0px;
-  color:rgb(58, 58,58);
+  color:rgb(255, 254, 254);
   text-decoration: none;
 }
 .nav-list li :hover{
-  border-bottom: 2px solid rgb(58,58,58);
+  border-bottom: 2px solid white;
 }
 .navbar .menu{
   display:none;
@@ -84,7 +89,7 @@ body::-webkit-scrollbar{
   gap:10px;
   flex-wrap: wrap;
   width:300px;
-  border:3px solid rgb(200 195 195);
+  border:3px solid rgb(255, 255, 255);
 }
 .profile-menu .profile-head{
   display: flex;
@@ -150,9 +155,11 @@ body::-webkit-scrollbar{
     width:300px;
     height:300px;
     top:60px;
-    color:white;
-    /* background-color: rgb(46, 5, 86); */
+    color:rgb(71, 71, 71) !important;
     border-bottom-left-radius: 5px;
+  }
+  .nav-list a{
+    color:rgb(71, 71, 71) !important;
   }
   
   .navbar .menu{
@@ -163,8 +170,8 @@ body::-webkit-scrollbar{
 .main-body{
   z-index: -1;
   overflow: hidden;
-  background-image: url('./compnents/1338701.png');
-  background-position: center;
+  background-image: url('./compnents/v1016-b-09.jpg');
+  /* background-position: center; */
   background-size: cover;
   width:100%;
   height:100vh;
@@ -213,66 +220,101 @@ body::-webkit-scrollbar{
 }
 
 .login{
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  align-items: end;
+}
+.header{
+  width: 190px;
+  padding-top:120px;
+  height:100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content:start;
+  
+
+}
+.header h2{
+  margin-top:40px;
+  color:white;
 }
 .login .form{
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: white;
   backdrop-filter: blur(1px);
-  color:white;
-  width:350px;
+  width:450px;
   height:450px;
-  border:1px solid white;
-  border-radius: 5px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
   padding:20px;
-  gap:10px;
+  margin-bottom:80px;
 }
 .form form{
-  padding:20px 0px;
+  border-radius:400px;
+  padding:30px 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap:20px;
+  gap:0px;
 }
 .form form .error{
-  color:red;
+  color:rgb(152, 9, 9);
   font-size: 0.9rem;
 }
 .login .form input{
-  color:rgb(255, 253, 253) !important;
+  color:rgb(71, 71, 71);
   font-size: 1.2rem;
-  width:300px;
+  width:90%;
   background-color: transparent;
-  border: none;
-  border-bottom: 1px solid white;
-  padding:2px;
-  padding-left:5px;
-}
-input:focus{
-  outline:none;
 }
 .login .form a{
-  color:rgb(146, 189, 232);
+  color:rgb(35, 117, 198);
 }
-
-.sign-up .form{
-  height:500px;
-  gap:10px;
+.form p{
+  color:rgb(71, 71, 71);
 }
-.sign-up .form form{
-  gap:10px;
+.sign-up .form form .buttons{
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+}
+.sign-up .header{
+  width:225px;
+}
+@media (max-width:768px) {
+  .login .form{
+    width:350px;
+  }
+}
+@media(max-width:500px){
+  .login{
+    justify-content: center;
+    gap:30px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .login .form{
+    width:90%;
+  }
+  .header{
+    height:auto;
+    width:90% !important;
+    padding-top:80px;
+  }
+  .header img{
+    display: none;
+  }
 }
 
 /* user Dashboard */
 
 .user-dashboard{
-  margin:5%;
-  margin-top:100px;
+  padding:0 5%;
+  padding-top:100px;
   display:flex;
+  background-color: rgb(37, 36, 36);
 }
 .user-dashboard .cards{
   width:100%;
@@ -295,6 +337,9 @@ input:focus{
   padding-top:80px;
   justify-content: center;
   align-items: start;
+}
+.user-dashboard .cards .card p{
+  color:rgb(71, 71, 71)
 }
 .user-dashboard .cards .card span{
   font-size: 1.3rem;

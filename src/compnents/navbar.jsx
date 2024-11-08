@@ -10,6 +10,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Tooltip from '@mui/material/Tooltip';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import icon from './regester icon.png'
 
 
 const style={fontSize:"50px"};
@@ -37,9 +38,9 @@ function Navbar(props) {
         }
     }
   return (
-    <div className="navbar">
+    <div className={`navbar ${(props.loggedIn && props.currPage!=='home' )?"background-dark":""}`}>
         <div className='nav-icon'>
-           {props.loggedIn!==true?<Link to="/"><img src="https://img.icons8.com/dotty/80/FFFFFF/add-user-male.png" alt="add-user-male"/></Link>:<Link style={style}   to="/user"><HomeIcon  sx={{ color: 'rgb(58,58,58)', fontSize:'50px' }}  /></Link>}
+           {props.loggedIn!==true?<Link to="/"><img src={icon} style={{width:"60px", height:"auto"}} alt="add-user-male"/></Link>:<Link style={{width:"40px"}}   to="/user"><HomeIcon  sx={{ color: 'white', fontSize:'50px' }}  /></Link>}
         </div>
         <div className="elements">
         <ul className={`nav-list ${showMenu? "show" : ""}`}>
@@ -48,7 +49,7 @@ function Navbar(props) {
             {props.loggedIn===false?<><li><Link to="/login"onClick={toggleMenu}>LOGIN</Link></li><li><Link to="/signup" onClick={()=>{toggleMenu(); props.setCurrPage("login")}}>SIGN UP</Link></li></>:<></>}
         </ul>
         {props.loggedIn===true?<button ref={profileMenuRef} className="avatar" onClick={toggleProfile}><Avatar alt="Remy Sharp" /></button>:<></>}
-        <div onClick={toggleMenu} ref={navMenuRef} className="menu"><MoreVertIcon sx={{ color: 'rgb(58,58,58)', fontSize:'40px' }} /></div>
+        <div onClick={toggleMenu} ref={navMenuRef} className="menu"><MoreVertIcon sx={{ color: 'black', fontSize:'40px' }} /></div>
         </div>
        {props.loggedIn===true?
        <div className={`profile-menu ${showProfile?"show":""}`}>

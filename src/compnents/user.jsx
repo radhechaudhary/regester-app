@@ -86,7 +86,7 @@ function User(prop) {
   }
 
   return (
-    <div className="user-dashboard">
+    <div className="user-dashboard ">
       <div className="cards">
         {rooms.map((value,index)=>{
           return(
@@ -98,7 +98,7 @@ function User(prop) {
                 {localStorage.getItem(`room-details-${value}`)?<p>Members:{JSON.parse(localStorage.getItem(`room-details-${value}`)).members}</p>:<p>Members:</p>}
               </div>
               <div className='edit-inputs'>
-                <button className='cross' onClick={cutPopUp}><CloseIcon sx={{ color: 'rgb(58, 58, 58)', fontSize:'30px' }}/></button>
+                <button className='cross' onClick={cutPopUp}><CloseIcon sx={{ color:'black', fontSize:'30px' }}/></button>
                 <input type="text" className='width-70' onChange={(e)=>{handleChange(e)}} value={details.name} name="name" placeholder='name'/>
                 <input type="date"  onChange={(e)=>{handleChange(e)}} name="inDate" value={details.inDate} placeholder='check-in-date'/>
                 <input type="time" onChange={(e)=>{handleChange(e)}} name="inTime" value={details.inTime} placeholder='check-In Time'/>

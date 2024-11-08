@@ -39,11 +39,13 @@ useEffect(() => {
 
 //login check function.................
 const [loginData,setLoginData]=useState({username:"", password:""}) //login data to store input from Login Form
-function checkLogin(username, password){                        // function to change login data
+function checkLogin(username, password){
+  setLoading(true)                        // function to change login data
   setLoginData({username:username, password:password});
 }
 useEffect(()=>{         // useEffect which triggers when login data is changed connects with the databse and check whether data is valid or not
       axios.post(`${process.env.REACT_APP_API_URL}/login`,{username:loginData.username, password:loginData.password})
+      
       .then((response)=>{
         if(response.data.status==='valid'){
           if(loginData.username!==currentUser){
@@ -55,18 +57,15 @@ useEffect(()=>{         // useEffect which triggers when login data is changed c
           localStorage.setItem('isLoggedIn', "true") // if data is valid  loggedIn value  is set to true;
           localStorage.setItem('name', response.data.name )
           localStorage.setItem('username',  loginData.username)  // set the username in local storage
-          setLoading(true)
-          setTimeout(()=>{
             setLoggedIn(true)
             setError("")
             setcurrPage('user')
             setLoading(false)
-            navigate ("/user", {replace:true})
-          },1500)
-          
+            navigate ("/user", {replace:true})  
         }
         else if(loginData.username){
           setError("*"+response.data+"*")
+          setLoading(false)
         }
       })
       .catch((err)=>{
@@ -76,29 +75,28 @@ useEffect(()=>{         // useEffect which triggers when login data is changed c
   
 //signUp add the user to  database......................................
 const [signUpData,  setSignUpData]=useState({}) // set auseState hook to store signUp data
-function signUp(values){ // function which triggers  when signUp form is  submitted
+function signUp(values){
+  setLoading(true) // function which triggers  when signUp form is  submitted
   setSignUpData({                                   // it updates the signUpdata
     ...values
   })
 }
 
 useEffect(()=>{          // useState which triggers when signUpData is updated everytime
-  axios.post(`${process.env.REACT_APP_API_URL}/signup`,{name:signUpData.name, mobile:signUpData.mobile, username:signUpData.username, password:signUpData.password})
+  axios.post(`${process.env.REACT_APP_API_URL}/signup`,{name:signUpData.name, mobile:signUpData.mobile, username:signUpData.username, password:signUpData.password, mail:signUpData.mail, buisness:signUpData.buisness, rooms:signUpData.rooms})
   .then((response)=>{
       if(signUpData.name){
         setCurrentUser(signUpData.username ); 
         localStorage.setItem('isLoggedIn', "true")
         localStorage.setItem('username', signUpData.username )
-        localStorage.setItem('name', SignUpData.name)
+        localStorage.setItem('name', signUpData.name)
         setLoading(true)
-        setTimeout(()=>{
           setError("")
           setLoggedIn(true)
           setCurrentUser(loginData.username);
           setcurrPage('user')
           setLoading(false)
           navigate ("/user", {replace:true})
-        },1500)
         for(let i=101;i<10000;i++){
           localStorage.removeItem(`room-details-${i}`)
         }
@@ -129,7 +127,7 @@ function signOut(){
     <>
      <Navbar loggedIn={loggedIn} currPage={currPage} setCurrPage={setcurrPage} signOut={signOut}/>
      <Routes >
-        <Route path='/' setCurrPage={setcurrPage} currPage={currPage}  element={<Home/>}/>
+        <Route path='/'   element={<Home setCurrPage={setcurrPage} currPage={currPage}/>}/>
         <Route path='/login' element={<Login checkLogin={checkLogin} setUsername={setCurrentUser} error={error} isLoading={loading}/> }/>
         <Route path='/signup' element={<SignUp signUp={signUp} setCurrPage={setcurrPage} setUsername={setCurrentUser} error={error} isLoading={loading}/>}/>
         <Route element={<Protected username={currentUser} setUsername={setCurrentUser} loggedIn={loggedIn}/>}>
