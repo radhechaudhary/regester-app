@@ -17,7 +17,7 @@ const style={fontSize:"50px"};
 function Navbar(props) {
     const profileMenuRef=useRef(null)
     const navMenuRef=useRef(null)
-    const [showMenu, setShowMenu]=React.useState(false)
+    const [showMenu, setShowMenu]=React.useState(null)
     const [showProfile,  setShowProfile]=useState(null)
     function toggleMenu(){
         setShowMenu(!showMenu)   
@@ -27,13 +27,17 @@ function Navbar(props) {
         
     }
     useEffect(()=>{
-        if(showProfile){
+        if(showProfile || showMenu){
             document.addEventListener('click' , clickedOutside)
         }
-    },[showProfile])
+    },[showProfile, showMenu])
     function clickedOutside(event){
-        if( profileMenuRef.current && !profileMenuRef.current.contains(event.target)){
+        if( profileMenuRef.current && showProfile && !profileMenuRef.current.contains(event.target)){
             setShowProfile(false)
+            document.removeEventListener('click', clickedOutside)
+        }
+        console.log(navMenuRef.current)
+        if( navMenuRef.current &&showMenu && !navMenuRef.current.contains(event.target)){
             setShowMenu(false)
             document.removeEventListener('click', clickedOutside)
         }
@@ -50,7 +54,7 @@ function Navbar(props) {
             {props.loggedIn===false?<><li><Link to="/login"onClick={toggleMenu}>LOGIN</Link></li><li><Link to="/signup" onClick={()=>{toggleMenu(); props.setCurrPage("login")}}>SIGN UP</Link></li></>:<></>}
         </ul>
         {props.loggedIn===true?<button ref={profileMenuRef} className="avatar" onClick={toggleProfile}><Avatar alt="Remy Sharp" /></button>:<></>}
-        <div onClick={()=>{toggleMenu(); toggleProfile()}}  ref={navMenuRef} className="menu"><MoreVertIcon sx={{ color: 'black', fontSize:'40px' }} /></div>
+        <div onClick={()=>{toggleMenu(); toggleProfile()}}  ref={navMenuRef} className="menu"><MoreVertIcon sx={{ color: 'white', fontSize:'40px' }} /></div>
         </div>
        {props.loggedIn===true?
        <div className={`profile-menu ${showProfile?"show":""}`}>
