@@ -38,7 +38,7 @@ function Navbar(props) {
         }
     }
   return (
-    <div className={`navbar ${(props.loggedIn && props.currPage!=='home' )?"background-dark":""}`}>
+    <div className={`navbar ${(props.loggedIn && props.currPage!=='home' && props.currPage!=="about" )?"background-dark":""}`}>
         <div className='nav-icon'>
            {props.loggedIn!==true?<Link to="/"><img src={icon} style={{width:"60px", height:"auto"}} alt="add-user-male"/></Link>:<Link style={{width:"40px"}}   to="/user"><HomeIcon  sx={{ color: 'white', fontSize:'50px' }}  /></Link>}
         </div>

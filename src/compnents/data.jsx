@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import Footer from './footer';
+import TextField from '@mui/material/TextField';
 
 function Data(props) {
     
@@ -50,10 +52,11 @@ const location=useLocation()
     useEffect(()=>{ 
         setData(database.filter((obj)=>{
             if(searchFor==="name"){
-                return ((obj[searchFor] || "").toLowerCase()).includes(searchValue.toLowerCase());
+                return ((obj[searchFor] || "").toLowerCase()).includes(searchValue.toLowerCase().trim());
             }
             else{
-                return obj[searchFor]===searchValue;
+                console.log(obj[searchFor].toString()===searchValue)
+                return (obj[searchFor].toString() || "")===searchValue;
             }    
         }))
         
@@ -62,17 +65,32 @@ const location=useLocation()
     
 
   return (
+    <>
     <div className='data'>
       <div className='data-table'>
         <div className="inputs">
-            <select onChange={(e)=>typeChange(e)}>
-                <option name="name" value="search">Name</option>
-                <option name="entry_date" value="date">Entry</option>
-                <option name="sr_no" value="search">Sr No.</option>
-                <option  name="out_date" value="date">Out</option>
-                <option name="all" value="all">All</option>
+            
+            <select style={{height:"56px", borderRadius:"5px", color:"white", backgroundColor:"transparent", border:"1px solid white"}} onChange={(e)=>typeChange(e)}>
+                <option name="name" style={{color:"black"}} value="search">Name</option>
+                <option name="entry_date" style={{color:"black"}} value="date">Entry</option>
+                <option name="sr_no" style={{color:"black"}} value="search">Sr No.</option>
+                <option  name="out_date"style={{color:"black"}} value="date">Out</option>
+                <option name="all" style={{color:"black"}} value="all">All</option>
             </select>
-            <input name="search" value={searchValue} onChange={(e)=>handleChange(e)} placeholder='search'  type={type}/>
+            <TextField id="outlined" sx={{
+                
+        "& .MuiOutlinedInput-root": {
+          "& fieldset": {
+            borderColor: "white", // Default outline color
+          },
+          "&:hover fieldset": {
+            borderColor: "white", // Outline color on hover
+          },
+          "&.Mui-focused fieldset": {
+            borderColor: "white", // Outline color when focused
+          },
+        },
+      }} name="search" value={searchValue} onChange={(e)=>handleChange(e)} placeholder='search'  type={type}/>
         </div>
         <table>
             <tr>
@@ -93,9 +111,12 @@ const location=useLocation()
                 </tr> )  
             })}
         </table>
-        {loading?<CircularProgress color="rgb(46, 5, 86)" />:<></>}
+        {loading?<CircularProgress  />:<></>}
       </div>
+      
     </div>
+    <Footer/>
+    </>
   )
 }
 

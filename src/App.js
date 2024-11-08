@@ -10,6 +10,7 @@ import SignUp from './compnents/SignUp';
 import User from './compnents/user'
 import Protected from './protected';
 import Data from './compnents/data';
+import About from './compnents/about';
 
 function App() {
   React.useEffect(()=>{                 // animation init
@@ -85,7 +86,7 @@ function signUp(values){
 useEffect(()=>{          // useState which triggers when signUpData is updated everytime
   axios.post(`${process.env.REACT_APP_API_URL}/signup`,{name:signUpData.name, mobile:signUpData.mobile, username:signUpData.username, password:signUpData.password, mail:signUpData.mail, buisness:signUpData.buisness, rooms:signUpData.rooms})
   .then((response)=>{
-      if(signUpData.name){
+      if(response.data==="submitted" && signUpData.name){
         setCurrentUser(signUpData.username ); 
         localStorage.setItem('isLoggedIn', "true")
         localStorage.setItem('username', signUpData.username )
@@ -100,6 +101,10 @@ useEffect(()=>{          // useState which triggers when signUpData is updated e
         for(let i=101;i<10000;i++){
           localStorage.removeItem(`room-details-${i}`)
         }
+      }
+      else if(signUpData.name){
+        setError(response.data)
+        setLoading(false)
       }
       
   })
@@ -130,6 +135,7 @@ function signOut(){
         <Route path='/'   element={<Home setCurrPage={setcurrPage} currPage={currPage}/>}/>
         <Route path='/login' element={<Login checkLogin={checkLogin} setUsername={setCurrentUser} error={error} isLoading={loading}/> }/>
         <Route path='/signup' element={<SignUp signUp={signUp} setCurrPage={setcurrPage} setUsername={setCurrentUser} error={error} isLoading={loading}/>}/>
+        <Route path='about' element={<About setCurrPage={setcurrPage} currPage={currPage}/>}/>
         <Route element={<Protected username={currentUser} setUsername={setCurrentUser} loggedIn={loggedIn}/>}>
           <Route path='/user' element={<User setCurrPage={setcurrPage} isLoggedIn={loggedIn} username={currentUser} setUsername={setCurrentUser}/>}/>
           <Route path='/data'  element={< Data setCurrPage={setcurrPage} setUsername={setCurrentUser} username={currentUser}/>}/>

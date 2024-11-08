@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 // import {  Routes, Route,  useNavigate, replace } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
+import Footer from './footer';
 
 function User(prop) {
   let rooms=[101,102,103,104,105,106,107] // array to store room numbers in order
@@ -86,6 +87,7 @@ function User(prop) {
   }
 
   return (
+    <div>
     <div className="user-dashboard ">
       <div className="cards">
         {rooms.map((value,index)=>{
@@ -116,6 +118,8 @@ function User(prop) {
       {showAlert===true?<div className='Alert'><Alert variant="filled" icon={<CheckIcon fontSize="inherit" />} severity="success">
         Data Saved SuccefFully!!
       </Alert></div>:<></>}
+    </div>
+    <Footer/>
     </div>
   )
 }

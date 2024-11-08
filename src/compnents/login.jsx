@@ -41,7 +41,7 @@ export default function Login(prop) {
             <form onSubmit={submit}>
                 <div style={Mystyle}>
                     <TextField id="outlined-multiline-flexible"  placeholder="username" label="username" name="username" value={username} onChange={(e) => addUsername(e.target.value)} maxRows={1}/>
-                    <TextField id="outlined-password-input" label="password" placeholder="password" name="password" value={password} onChange={(e) => addPassword(e.target.value)} maxRows={1}/>
+                    <TextField id="outlined-password-input" label="password" placeholder="password" name="password" type="password" value={password} onChange={(e) => addPassword(e.target.value)} maxRows={1}/>
                 </div>
                 <p className="error">{prop.error}</p>
                 <button type="submit" className="btn btn-primary" style={Mystyle2}>Login</button>
