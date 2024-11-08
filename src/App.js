@@ -44,7 +44,7 @@ function checkLogin(username, password){
   setLoginData({username:username, password:password});
 }
 useEffect(()=>{         // useEffect which triggers when login data is changed connects with the databse and check whether data is valid or not
-      axios.post(`${process.env.API_URL}/login`,{username:loginData.username, password:loginData.password})
+      axios.post(`${process.env.REACT_APP_API_URL}/login`,{username:loginData.username, password:loginData.password})
       
       .then((response)=>{
         if(response.data.status==='valid'){
@@ -83,7 +83,7 @@ function signUp(values){
 }
 
 useEffect(()=>{          // useState which triggers when signUpData is updated everytime
-  axios.post(`${process.env.API_URL}/signup`,{name:signUpData.name, mobile:signUpData.mobile, username:signUpData.username, password:signUpData.password, mail:signUpData.mail, buisness:signUpData.buisness, rooms:signUpData.rooms})
+  axios.post(`${process.env.REACT_APP_API_URL}/signup`,{name:signUpData.name, mobile:signUpData.mobile, username:signUpData.username, password:signUpData.password, mail:signUpData.mail, buisness:signUpData.buisness, rooms:signUpData.rooms})
   .then((response)=>{
       if(signUpData.name){
         setCurrentUser(signUpData.username ); 
