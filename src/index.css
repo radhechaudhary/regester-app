@@ -385,6 +385,10 @@ body::-webkit-scrollbar{
 @media (max-width:640px){
   .user-dashboard .cards .card-opened{
     width:90%;
+    gap:10px;
+  }
+  .user-dashboard .cards .card-opened .edit-inputs{
+    gap:20px !important;
   }
 
 }
