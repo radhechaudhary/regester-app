@@ -9,6 +9,7 @@
 }
 body{
   overflow: scroll;
+  background-color: rgba(71,71,71,1)
 }
 body::-webkit-scrollbar{
   display: none;
@@ -297,6 +298,7 @@ body::-webkit-scrollbar{
   }
   .login .form{
     width:90%;
+    height:400px;
   }
   .header{
     height:auto;
@@ -385,10 +387,10 @@ body::-webkit-scrollbar{
 @media (max-width:640px){
   .user-dashboard .cards .card-opened{
     width:90%;
-    gap:10px;
+    gap:20px;
   }
   .user-dashboard .cards .card-opened .edit-inputs{
-    gap:20px !important;
+    gap:15px !important;
   }
 
 }
