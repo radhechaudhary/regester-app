@@ -34,22 +34,23 @@ function Navbar(props) {
     function clickedOutside(event){
         if( profileMenuRef.current && !profileMenuRef.current.contains(event.target)){
             setShowProfile(false)
+            setShowMenu(false)
             document.removeEventListener('click', clickedOutside)
         }
     }
   return (
     <div className={`navbar ${(props.loggedIn && props.currPage!=='home' && props.currPage!=="about" )?"background-dark":""}`}>
         <div className='nav-icon'>
-           {props.loggedIn!==true?<Link to="/"><img src={icon} style={{width:"60px", height:"auto"}} alt="add-user-male"/></Link>:<Link style={{width:"40px"}}   to="/user"><HomeIcon  sx={{ color: 'white', fontSize:'50px' }}  /></Link>}
+           {props.loggedIn!==true?<Link onClick={()=>{toggleProfile(); toggleMenu()}} to="/"><img src={icon} style={{width:"60px", height:"auto"}} alt="add-user-male"/></Link>:<Link style={{width:"40px"}}   to="/user"><HomeIcon  sx={{ color: 'white', fontSize:'50px' }}  /></Link>}
         </div>
         <div className="elements">
         <ul className={`nav-list ${showMenu? "show" : ""}`}>
-            {<li><Link to="/" onClick={()=>{toggleMenu(); props.setCurrPage("home")}}>HOME</Link></li>}
-            <li><Link to="/about" onClick={()=>{toggleMenu(); props.setCurrPage("about")}}>ABOUT</Link></li>
+            {<li><Link to="/" onClick={()=>{toggleMenu(); toggleProfile(); props.setCurrPage("home")}}>HOME</Link></li>}
+            <li><Link to="/about" onClick={()=>{toggleMenu(); toggleProfile(); props.setCurrPage("about")}}>ABOUT</Link></li>
             {props.loggedIn===false?<><li><Link to="/login"onClick={toggleMenu}>LOGIN</Link></li><li><Link to="/signup" onClick={()=>{toggleMenu(); props.setCurrPage("login")}}>SIGN UP</Link></li></>:<></>}
         </ul>
         {props.loggedIn===true?<button ref={profileMenuRef} className="avatar" onClick={toggleProfile}><Avatar alt="Remy Sharp" /></button>:<></>}
-        <div onClick={toggleMenu} ref={navMenuRef} className="menu"><MoreVertIcon sx={{ color: 'black', fontSize:'40px' }} /></div>
+        <div onClick={()=>{toggleMenu(), toggleProfile()}}  ref={navMenuRef} className="menu"><MoreVertIcon sx={{ color: 'black', fontSize:'40px' }} /></div>
         </div>
        {props.loggedIn===true?
        <div className={`profile-menu ${showProfile?"show":""}`}>
@@ -58,16 +59,16 @@ function Navbar(props) {
                 <h2>{localStorage.getItem('name')}</h2>
             </div>
             <div  className='buttons'>
-                <Tooltip title="rooms" followCursor ><button onClick={()=>{toggleProfile()}}><HotelIcon sx={{ color: 'white', fontSize:'50px' }}/></button></Tooltip>
-                <Tooltip title="entries" followCursor>{props.loggedIn===true && props.currPage!=="data"?<Link to="/data" onClick={()=>{ toggleProfile(); props.setCurrPage("data")}}><LocalLibraryIcon  sx={{ color: 'white', fontSize:'50px' }}/></Link>:<></>}</Tooltip>
-                <Tooltip title="info" followCursor><Link to='/profile-info' onClick={()=>{toggleProfile()}}><InfoIcon sx={{ color: 'white', fontSize:'50px' }}/></Link></Tooltip>
-                <Tooltip title="setting" followCursor><button onClick={()=>{toggleProfile()}}><SettingsIcon sx={{ color: 'white', fontSize:'50px' }}/></button></Tooltip>
+                <Tooltip title="rooms" followCursor ><button onClick={()=>{toggleProfile(); toggleMenu()}}><HotelIcon sx={{ color: 'white', fontSize:'50px' }}/></button></Tooltip>
+                <Tooltip title="entries" followCursor>{props.loggedIn===true && props.currPage!=="data"?<Link to="/data" onClick={()=>{ toggleProfile(); props.setCurrPage("data"); toggleMenu()}}><LocalLibraryIcon  sx={{ color: 'white', fontSize:'50px' }}/></Link>:<></>}</Tooltip>
+                <Tooltip title="info" followCursor><Link to='/profile-info' onClick={()=>{toggleProfile(); toggleMenu()}}><InfoIcon sx={{ color: 'white', fontSize:'50px' }}/></Link></Tooltip>
+                <Tooltip title="setting" followCursor><button onClick={()=>{toggleProfile(); toggleMenu()}}><SettingsIcon sx={{ color: 'white', fontSize:'50px' }}/></button></Tooltip>
                 
                 
                 
             </div>
             <div className="list">
-                <button onClick={()=>{ props.setCurrPage("home"); props.signOut()}}><LogoutIcon/>Sign Out</button>
+                <button onClick={()=>{ props.setCurrPage("home"); props.signOut(); toggleProfile(); toggleMenu()}}><LogoutIcon/>Sign Out</button>
             </div>
         </div>:<></>}
     </div>
